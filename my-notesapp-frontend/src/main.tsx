@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import Note from "./pages/Note";
+import CreateNote from "./pages/NewNote";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="note/:id" element={<Note />} />
+          <Route path="/new-note" element={<CreateNote />} />
         </Route>
       </Routes>
     </BrowserRouter>
