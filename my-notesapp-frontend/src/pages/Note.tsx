@@ -31,11 +31,11 @@ export default function Note() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-slate-800 dark:text-slate-200">
-      <h1 className="text-3xl font-bold mb-4">{title}</h1>
-      <p className="mb-6">{content}</p>
+      <h1 className="text-3xl font-bold mb-4 text-black">{title}</h1>
+      <p className="mb-6 text-black">{content}</p>
       <Link
         to="/"
-        className="rounded-lg bg-primary px-4 py-2 text-white hover:bg-primary/90"
+        className="rounded-lg bg-primary px-4 py-2 text-black hover:bg-primary/90"
       >
         ← Back to Notes
       </Link>

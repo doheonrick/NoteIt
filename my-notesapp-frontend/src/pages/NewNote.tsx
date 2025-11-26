@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { addNote } from "../../services/notes";
+
+  
 
 const CreateNote: React.FC = () => {
-  const handleSave = () => {
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const navigate = useNavigate();
+    
+    const handleSave = async () => {
     // TODO: implement save functionality
+    if (!title.trim() && !content.trim()) {
+        alert("Cannot save empty note");
+        return;
+      }
+    
+      try {
+        const noteId = Date.now(); // Make new id on Frontend
+        console.log("noteId: ", noteId);
+    
+        const newNote = await addNote({
+          noteId,
+          title,
+          content,
+          // image: "" // No image yet
+        });
+    
+        console.log("Created Note:", newNote);
+    
+        navigate("/"); // move to home after save
+      } catch (err) {
+        console.log(err);
+        alert("Failed to save note");
+      }
   };
 
   const handleDiscard = () => {
     // TODO: implement discard functionality
+    navigate("/");
   };
 
   return (
@@ -75,11 +107,13 @@ const CreateNote: React.FC = () => {
               Title
             </label>
             <input
-              id="note-title"
-              name="note-title"
-              type="text"
-              placeholder="Note Title"
-              className="form-input block w-full bg-background-light dark:bg-background-dark border-0 border-b-2 border-background-light/10 dark:border-background-dark/20 focus:ring-0 focus:border-primary text-3xl font-bold p-0 placeholder-background-dark/40 dark:placeholder-background-light/40 text-background-dark dark:text-background-light"
+                id="note-title"
+                name="note-title"
+                type="text"
+                placeholder="Note Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="form-input ..."
             />
           </div>
 
@@ -88,11 +122,13 @@ const CreateNote: React.FC = () => {
               Content
             </label>
             <textarea
-              id="note-content"
-              name="note-content"
-              rows={15}
-              placeholder="Start writing here..."
-              className="form-textarea block w-full bg-background-light dark:bg-background-dark border-0 focus:ring-0 text-base placeholder-background-dark/40 dark:placeholder-background-light/40 text-background-dark dark:text-background-light"
+                id="note-content"
+                name="note-content"
+                rows={15}
+                placeholder="Start writing here..."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="form-textarea ..."
             ></textarea>
           </div>
 

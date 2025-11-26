@@ -10,13 +10,24 @@ const getNote = async (req, res) => {
 
     // Always use a try catch block to contain errors
     try {
+        let title = "";
+        let content = "";
 
-        // We get the title from the notes array
-        const title = notes[Number(noteId) - 1].title;
+        for (let i = 0; i < notes.length; i++)
+            {
+                if (notes[i].id === Number(noteId)) {
+                    title = notes[i].title;
+                    content = notes[i].content;
+                    break;
+                }
+            }
 
-        // We get the content from the notes array
-        const content = notes[Number(noteId) - 1].content;
-
+        console.log("title: ", title);
+        console.log("content: ", content);
+        
+        if (title === "" || content === ""){
+            return res.status(400).json({message: "Empty title, content"});
+        }
         // We will return a ok status with the title and content
         // It should look similar to this:
         // {

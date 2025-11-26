@@ -1,11 +1,14 @@
 import type { Note } from "../types/note";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllNotes, getNote, deleteNote, addNote, patchNote } from "../../services/notes";
 import { useEffect, useState } from "react";
 import { __unstable__loadDesignSystem } from "tailwindcss";
 
+
 export default function Home() {
     // Use useState to set variables
+    const navigate = useNavigate();
+
     const [notes, setNotes] = useState<Note[]>([]);
     const [oneNote, setOneNote] = useState<Note[]>([]);
 
@@ -56,12 +59,7 @@ export default function Home() {
 
     const handleAddNote = async () => {
         try {
-            const res = await addNote({
-            noteId: 4,
-            title: "My new note",
-            content: "This is a test note"
-            });
-            console.log("Add result:", res);
+            navigate("/new-note");
         } catch(err) {
             console.log("Error adding note:", err);
         }
@@ -122,7 +120,7 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           </div>
             <h2 className="text-3xl font-bold text-slate-900">My Notes</h2>
-            <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary/90">
+            <button onClick={() => navigate("/new-note")} className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary/90">
               <span className="material-symbols-outlined">add</span>
               New Note
             </button>
@@ -137,13 +135,13 @@ export default function Home() {
                 className="group relative aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl block"
             >
                 <img
-                src={note.image}
-                alt={note.title}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    src={note.image}
+                    alt={note.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                <p className="text-lg font-bold text-white">{note.title}</p>
+                    <p className="text-lg font-bold text-white">{note.title}</p>
                 </div>
             </Link>
             ))}
