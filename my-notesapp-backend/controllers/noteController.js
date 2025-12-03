@@ -102,31 +102,28 @@ const addNote = async (req, res) => {
     }
 };
 
+// This is a code to delete a note, but it goes one by one so in a real world we do not do this
 const deleteNote = async (req, res) => {
  
     const { noteId } = req.params;
 
     try {
         const numNoteId = Number(noteId);
+
         const updatedNotes = notes.filter(note => note.id !== numNoteId);
-        console.log("updatedNotes: ", updatedNotes);
 
-        // BAD CODE; JUST FOR TESTING
+        // update in-memory notes
+        notes.length = 0;
+        updatedNotes.forEach(n => notes.push(n));
 
-        // Get the full path to the JSON file
+        // then update the file
         const filePath = path.resolve('./mockDB/notes.json');
-
-        // Write the updated notes array back to the file
         fs.writeFileSync(filePath, JSON.stringify(updatedNotes, null, 2), 'utf-8');
 
-        res.status(200).json({message: "Successfully deleted note"})
+        res.status(200).json({message: "Successfully deleted note"});
     } catch (err) {
-        // If there is an error, we want to see it so we console.log
-        // This is only for development, in production remove it
         console.log("error: ", err);
-
-        // Return error status and error message
-        res.status(500).json({error: "Error deleting note info"})
+        res.status(500).json({error: "Error deleting note info"});
     }
 };
 

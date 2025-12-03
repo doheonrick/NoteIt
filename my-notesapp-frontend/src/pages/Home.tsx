@@ -44,19 +44,6 @@ export default function Home() {
         }
     }
 
-    const handleDeleteNote = async () => {
-        try {
-            // Call API
-            const res = await deleteNote("1");
-
-            // set variable with data
-            console.log("Note 1: ", res.message);
-        } catch (err) {
-            console.log("err: ", err);
-        }
-    }
-
-
     const handleAddNote = async () => {
         try {
             navigate("/new-note");
@@ -108,9 +95,6 @@ export default function Home() {
           <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-primary/90" onClick={handleGetNote}>
               Get Note 1
             </button>
-            <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-primary/90" onClick={handleDeleteNote}>
-              Delete Note 1
-            </button>
             <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-primary/90" onClick={handleAddNote}>
               Add Note
             </button>
@@ -120,10 +104,6 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           </div>
             <h2 className="text-3xl font-bold text-slate-900">My Notes</h2>
-            <button onClick={() => navigate("/new-note")} className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary/90">
-              <span className="material-symbols-outlined">add</span>
-              New Note
-            </button>
           </div>
 
           {/* Notes Grid */}
