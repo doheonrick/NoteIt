@@ -92,15 +92,11 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           {/* Title + Button */}
           <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-          <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-primary/90" onClick={handleGetNote}>
-              Get Note 1
-            </button>
+          
             <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-primary/90" onClick={handleAddNote}>
               Add Note
             </button>
-            <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-primary/90" onClick={handlePatchNote}>
-              Patch Note
-            </button>
+            
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           </div>
             <h2 className="text-3xl font-bold text-slate-900">My Notes</h2>
